@@ -4,14 +4,15 @@
     <head>
         <title>Dashboard</title>
 
-        <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'dashboard/icons/css/uicons-regular-rounded.css' %}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/app-container.css' %}" />
         <link rel="stylesheet" href="{% static 'dashboard/css/left-menu.css' %}" />
         <link rel="stylesheet" href="{% static 'dashboard/css/right-menu.css' %}" />
-        <link rel="stylesheet" href="{% static 'dashboard/css/app-container.css' %}" />
-        <link rel="stylesheet" href="{% static 'dashboard/icons/css/uicons-regular-rounded.css' %}">
+        <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}" />
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="{% static 'dashboard/js/time.js' %}"></script>
+        <script src="{% static 'dashboard/js/popup.js' %}"></script>
     </head>
     <body>
         {% include './left-menu.html' %}

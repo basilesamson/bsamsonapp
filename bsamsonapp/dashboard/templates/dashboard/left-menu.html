@@ -1,7 +1,13 @@
 <div class="left-menu">
     <section>
-        <section>
+        <section class="user">
             <h2>{{ user.first_name | title }} {{ user.last_name | upper }}</h2>
+            <div class="popup">
+                <a href=""><i class="fi fi-rr-user"></i>Voir le profil</a>
+                <a href=""><i class="fi fi-rr-paper-plane"></i>Inviter des amis</a>
+                <div class="separator"></div>
+                <a href="{% url 'logout' %}">Se déconnecter</a>
+            </div>
         </section>
         <section id="menu">
             <h2>Menu <i class="fi fi-rr-add"></i></h2>
@@ -16,6 +22,7 @@
         </section>
     </section>
     <section>
+        
         <h4>2022 par Basile SAMSON</h4>
     </section>
 </div>
