@@ -24,8 +24,12 @@
 .left-menu a:hover {
     color: #06D7A0;
 }
-.left-menu i {
+.left-menu a i {
     margin: 0 .5em 0 0;
+}
+
+.left-menu h2 {
+    justify-content: space-between;
 }
 
 #menu {

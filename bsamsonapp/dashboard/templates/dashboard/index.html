@@ -1,10 +1,18 @@
 {% extends 'dashboard/base.html' %}
 
 {% block content %}
-<h1>Hello Django!</h1>
-<ul>
-    {% for task in tasks %}
-    <li>{{ task.name }}</li>
-    {% endfor %}
-</ul>
+<section>
+    <h2>Tâches <i class="fi fi-rr-add"></i></h2>
+    <div class="tasks widget">
+        {% for task in tasks %}
+        <a href="#">
+            <span>{{ task.name }}</span>
+            <span>
+                {{ task.progress }}%
+                <div class="progressContainer"><div class="progressValue" style="background: #0080FF; width: {{ task.progress }}%;"></div></div>
+            </span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
