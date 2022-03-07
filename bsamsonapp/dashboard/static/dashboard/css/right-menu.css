@@ -1,0 +1,13 @@
+.right-menu {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 13em;
+
+    background: #FFFFFF;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

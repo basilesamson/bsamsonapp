@@ -1,0 +1,33 @@
+.left-menu {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 14em;
+
+    background: #FFFFFF;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.left-menu a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #000000;
+    padding: 1em 0 0 0;
+}
+.left-menu a:hover {
+    color: #06D7A0;
+}
+.left-menu i {
+    margin: 0 .5em 0 0;
+}
+
+#menu {
+    margin-top: 5em;
+}

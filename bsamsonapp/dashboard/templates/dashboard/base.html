@@ -1,0 +1,22 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Dashboard</title>
+
+        <link rel="stylesheet" href="{% static 'dashboard/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'dashboard/css/left-menu.css' %}" />
+        <link rel="stylesheet" href="{% static 'dashboard/css/right-menu.css' %}" />
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="{% static 'dashboard/js/time.js' %}"></script>
+    </head>
+    <body>
+        {% include './left-menu.html' %}
+        <div class="app-container">
+            {% block content %}{% endblock %}
+        </div>
+        {% include './right-menu.html' %}
+    </body>
+</html>

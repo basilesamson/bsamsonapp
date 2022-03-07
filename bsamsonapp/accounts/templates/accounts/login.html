@@ -1,0 +1,41 @@
+{% extends "./base.html" %}
+
+{% block content %}
+
+
+<div class="formContainer">
+    <h2>Connexion</h2>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" value="" id="next" name="next">
+        {{ form.as_p }}
+        <!-- <a class="forgotPassword" href="{% url 'password_reset' %}">Mot de passe oublié ?</a> -->
+        <p>{{ message|title }}</p>
+        <div>
+            <a href="{% url 'signup' %}">S'inscrire</a>
+            <button type="submit">Connexion</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+            }
+        }
+        return false;
+    };
+    console.log(getUrlParameter('next'))
+    $('input#next').val(getUrlParameter('next'));
+</script>
+
+{% endblock %}
