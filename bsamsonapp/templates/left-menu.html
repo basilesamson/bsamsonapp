@@ -1,0 +1,36 @@
+<div class="left-menu">
+    <section>
+        {% if user.is_authenticated %}
+        <section class="user">
+            <h2>{{ user.first_name | title }} {{ user.last_name | upper }} <i class="fi fi-rr-angle-small-down"></i></h2>
+            <div class="popup">
+                <a href=""><i class="fi fi-rr-user"></i>Voir le profil</a>
+                <a href=""><i class="fi fi-rr-paper-plane"></i>Inviter des collaborateurs</a>
+                <div class="separator"></div>
+                <a href="{% url 'accounts:logout' %}">Se déconnecter</a>
+            </div>
+        </section>
+        <section id="menu">
+            <h2>Menu <i class="fi fi-rr-add"></i></h2>
+            <a href="/"><i class="fi fi-rr-home"></i>Dashboard</a>
+            <a href=""><i class="fi fi-rr-calendar"></i>Calendrier</a>
+            <a href=""><i class="fi fi-rr-apps"></i>Projets</a>
+            <a href=""><i class="fi fi-rr-user"></i>Profil</a>
+            <a href=""><i class="fi fi-rr-comment"></i>Messages</a>
+            {% if user.is_superuser %}
+            <a href="/admin"><i class="fi fi-rr-settings"></i>Administration</a>
+            {% endif %}
+        </section>
+        {% else %}
+            <section>
+                <h2>S'authentifier</h2>
+                <a href="{% url 'accounts:login' %}"><i class="fi fi-rr-following"></i>Connexion</a>
+                <a href="{% url 'accounts:signup' %}"><i class="fi fi-rr-user-add"></i>Inscription</a>
+            </section>
+        {% endif %}
+    </section>
+    <section>
+        
+        <h4>2022 par Basile SAMSON</h4>
+    </section>
+</div>

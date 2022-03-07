@@ -1,11 +1,11 @@
-{% extends 'dashboard/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 <section>
     <h2>Tâches <i class="fi fi-rr-add"></i></h2>
     <div class="tasks widget">
         {% for task in tasks %}
-        <a href="#">
+        <a href="{% url 'task:task' task.id %}">
             <span>{{ task.name }}</span>
             <span>
                 {{ task.progress }}%

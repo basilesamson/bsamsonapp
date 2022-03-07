@@ -28,22 +28,25 @@ a {
     text-decoration: none;
     color: #000000;
 }
-h1, h2, h3, h4 {
+h1, h2, h3, h4, p {
     margin: 0;
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 2.5em;
 }
 
 h2 {
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.25em;
 }
 h2 i:hover {
     color: #06D7A0;
     cursor: pointer;
+}
+p {
+    font-size: 1.1em;
 }
 
 .progressContainer {
@@ -60,14 +63,14 @@ h2 i:hover {
 }
 
 .separator {
-    margin: .5em;
+    margin: .5em 0;
     height: 1px;
     background: #ECECEC;
 }
 
 .popup {
     padding: .5em;
-    width: 15em;
+    width: 13vw;
     z-index: 100;
     display: flex;
     flex-direction: column;
@@ -78,5 +81,5 @@ h2 i:hover {
 }
 .popup a {
     font-size: 1em;
-    padding: 1em;
+    padding: .5em;
 }

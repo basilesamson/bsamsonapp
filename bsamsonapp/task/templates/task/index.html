@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section>
+  <h2>Tâches <i class="fi fi-rr-add"></i></h2>
+  <div class="widget">
+    <h2>{{ task.name }}</h2>
+    <section>
+      <h2>Description</h2>
+      <p>{{ task.description }}</p>
+    </section>
+    <section>
+      <h2>
+        Avancement
+        <span>
+          {{ task.progress }}%
+          <div class="progressContainer"><div class="progressValue" style="background: #0080FF; width: {{ task.progress }}%;"></div></div>
+        </span>
+      </h2>
+      
+      {% for step in steps %}
+      <div class="list-item">
+        <span>
+          {% if step.status == "Bloqué" %}
+            <i class="fi fi-sr-exclamation" style="color: #DF0000;"></i>
+          {% elif step.status == "Terminé" %}
+            <i class="fi fi-sr-checkbox" style="color: #06D7A0;"></i>
+          {% elif step.status == "En cours" %}
+            <i class="fi fi-sr-clock" style="color: #FFC700;"></i>
+          {% else %}
+            <i class="fi fi-rr-square"></i>
+          {% endif %}
+          {{step.name}}
+        </span>
+        <span>
+          {{ step.status }} <i class="fi fi-rr-angle-small-down"></i>
+        </span>
+      </div>
+      {% endfor %}
+      <div class="list-item">
+        <span>
+          <i class="fi fi-rr-add"></i>
+          Ajouter une étape
+        </span>
+      </div>
+    </section>
+  </div>
+</section>
+
+{% endblock %}

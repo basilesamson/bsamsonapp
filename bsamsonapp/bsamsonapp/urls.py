@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('', login_required(views.index)),
+    path('task/', include('task.urls')),
 ]

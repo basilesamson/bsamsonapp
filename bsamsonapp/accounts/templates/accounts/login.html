@@ -1,18 +1,18 @@
-{% extends "./base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
 
 <div class="formContainer">
     <h2>Connexion</h2>
-    <form action="{% url 'login' %}" method="post">
+    <form action="{% url 'accounts:login' %}" method="post">
         {% csrf_token %}
         <input type="hidden" value="" id="next" name="next">
         {{ form.as_p }}
-        <!-- <a class="forgotPassword" href="{% url 'password_reset' %}">Mot de passe oublié ?</a> -->
+        <!-- <a class="forgotPassword" href="{% url 'accounts:password_reset' %}">Mot de passe oublié ?</a> -->
         <p>{{ message|title }}</p>
         <div>
-            <a href="{% url 'signup' %}">S'inscrire</a>
+            <a href="{% url 'accounts:signup' %}">S'inscrire</a>
             <button type="submit">Connexion</button>
         </div>
     </form>

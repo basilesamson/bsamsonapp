@@ -1,17 +1,17 @@
-{% extends './base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 <div class="formContainer">
     <h2>Inscription</h2>
-    <form action="{% url 'signup' %}" method="post">
+    <form action="{% url 'accounts:signup' %}" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         {% if form.errors %}
             {{ form.errors }}
         {% endif %}
         <div>
-            <a href="{% url 'login' %}">Se connecter</a>
+            <a href="{% url 'accounts:login' %}">Se connecter</a>
             <button type="submit">S’inscrire</button>
         </div>
     </form>
