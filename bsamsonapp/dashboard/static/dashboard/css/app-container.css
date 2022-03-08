@@ -37,7 +37,7 @@
 .app-container .widget section > h2 {
     display: flex;
     justify-content: space-between;
-    margin: 0 0 .5em 0;
+    margin: 0 0 1em 0;
 }
 
 .app-container .tasks a {
@@ -62,7 +62,40 @@
 }
 .app-container .list-item:last-child {
     border-bottom: none;
+    margin-bottom: -1em;
 }
 .app-container .list-item span:first-child {
     font-weight: 100;
+}
+
+.app-container .task-status:hover, .app-container .addStep i:hover {
+    color: #06D7A0;
+    cursor: pointer;
+}
+
+.app-container .addStep form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.app-container .addStep input[type="text"] {
+    width: 80%;
+    padding: .5em 0;
+    margin: -.5em 0 -1em 0;
+}
+.app-container .addStep input[type="text"]:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #06D7A0;
+}
+.callToAction {
+    cursor: pointer;
+    padding: .5em 2em;
+    border-radius: .5em;
+    background: #F1F1F2;
+}
+.callToAction:hover {
+    background: #ECECEC;
+    color: #000000;
 }

@@ -24,7 +24,7 @@ class Step(models.Model):
         FINISHED = 'Terminé'
         BLOCKED = 'Bloqué'
         IN_PROGRESS = 'En cours'
-        UNDEFINED = 'Non commencé'
+        UNDEFINED = ' '
     name = models.fields.CharField("Nom de l'étape", max_length=100)
     status = models.fields.CharField('Status', default=Status.UNDEFINED, choices=Status.choices, max_length=20)
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
@@ -33,5 +33,5 @@ class Step(models.Model):
         return f'{self.name}'
 
     class Meta:
-        ordering = ['task', 'status']
+        ordering = ['task', 'id']
 

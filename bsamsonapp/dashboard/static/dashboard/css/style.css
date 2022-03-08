@@ -48,6 +48,26 @@ h2 i:hover {
 p {
     font-size: 1.1em;
 }
+input {
+    background: none;
+    border: none;
+    font-size: 1em;
+    padding: .5em;
+    text-align: left;
+}
+input:hover {
+    color: #06D7A0;
+}
+
+.red {
+    color: #DF0000;
+}
+.green {
+    color: #06D7A0;
+}
+.yellow {
+    color: #FFC700;
+}
 
 .progressContainer {
     width: 9em;
@@ -60,6 +80,7 @@ p {
     width: 0%;
     border-radius: .5em;
     height: 100%;
+    transition: .5s;
 }
 
 .separator {
@@ -70,9 +91,8 @@ p {
 
 .popup {
     padding: .5em;
-    width: 13vw;
     z-index: 100;
-    display: flex;
+    display: none;
     flex-direction: column;
     position: absolute;
     background: #FFFFFF;

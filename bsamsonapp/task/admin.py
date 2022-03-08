@@ -7,6 +7,6 @@ class TaskAdmin(admin.ModelAdmin):
 admin.site.register(Task, TaskAdmin)
 
 class StepAdmin(admin.ModelAdmin):
-    list_display = ('task', 'name', 'status') # liste les champs que nous voulons sur l'affichage de la liste
+    list_display = ('name', 'task', 'status') # liste les champs que nous voulons sur l'affichage de la liste
 
 admin.site.register(Step, StepAdmin)
