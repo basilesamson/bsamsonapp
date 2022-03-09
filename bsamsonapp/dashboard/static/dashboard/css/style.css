@@ -55,8 +55,30 @@ input {
     padding: .5em;
     text-align: left;
 }
-input:hover {
+input:hover, a:focus {
+    outline: none;
+    border: none;
     color: #06D7A0;
+}
+input[type="text"], input[type="password"] {
+    width: 80%;
+    padding: .5em 0;
+    margin: -.5em 0 -1em 0;
+}
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #06D7A0 !important;
+}
+textarea {
+    resize: none;
+    overflow: hidden;
+    outline: none;
+    font-family: "Roboto";
+    width: 100%;
+    font-size: 1em;
+    padding: 0;
+    border: none;
 }
 
 .red {
@@ -91,7 +113,7 @@ input:hover {
 
 .popup {
     padding: .5em;
-    z-index: 100;
+    z-index: 500;
     display: none;
     flex-direction: column;
     position: absolute;
@@ -99,7 +121,31 @@ input:hover {
     border-radius: .5em;
     box-shadow: 0 .5em 5em #00000016;
 }
-.popup a {
+.popup a ,.popup input {
     font-size: 1em;
     padding: .5em;
+}
+
+.button {
+    font-size: 1em;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    padding: .5em 2em;
+    border-radius: .5em;
+    background: #F1F1F2;
+}
+.button:hover {
+    background: #ECECEC;
+    color: #000000;
+}
+.callToAction {
+    cursor: pointer;
+    padding: .5em 2em;
+    border-radius: .5em;
+    background: #07ecaf;
+}
+.callToAction:hover {
+    background: #06d79f;
+    color: #000000;
 }

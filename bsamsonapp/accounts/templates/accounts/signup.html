@@ -2,17 +2,17 @@
 
 {% block content %}
 
-<div class="formContainer">
+<div class="widget form">
     <h2>Inscription</h2>
     <form action="{% url 'accounts:signup' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form }}
         {% if form.errors %}
             {{ form.errors }}
         {% endif %}
         <div>
-            <a href="{% url 'accounts:login' %}">Se connecter</a>
-            <button type="submit">S’inscrire</button>
+            <a class="button" href="{% url 'accounts:login' %}">Se connecter</a>
+            <button class="button callToAction" type="submit">S’inscrire</button>
         </div>
     </form>
 </div>

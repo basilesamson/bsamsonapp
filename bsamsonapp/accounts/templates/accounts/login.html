@@ -3,17 +3,17 @@
 {% block content %}
 
 
-<div class="formContainer">
+<div class="widget form">
     <h2>Connexion</h2>
     <form action="{% url 'accounts:login' %}" method="post">
         {% csrf_token %}
         <input type="hidden" value="" id="next" name="next">
-        {{ form.as_p }}
+        {{ form }}
         <!-- <a class="forgotPassword" href="{% url 'accounts:password_reset' %}">Mot de passe oublié ?</a> -->
         <p>{{ message|title }}</p>
         <div>
-            <a href="{% url 'accounts:signup' %}">S'inscrire</a>
-            <button type="submit">Connexion</button>
+            <a class="button" href="{% url 'accounts:signup' %}">S'inscrire</a>
+            <button class="button callToAction" type="submit">Connexion</button>
         </div>
     </form>
 </div>
