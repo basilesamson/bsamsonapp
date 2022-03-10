@@ -2,12 +2,13 @@ import { setUpPopups } from './popup.js';
 
 $( document ).ready(function() {
     initTask();
+    initAddStep();
 });
 
 function initTask() {
     setStepStatus();
+    setTaskStatus();
     setDescription();
-    addStep();
     
     // for each progress bar, do the updateProgressBar function
     $('span.progressBar').map(function() {
@@ -23,7 +24,6 @@ function setDescription() {
 
     $('.taskDescription').find('input').click(function() {
         if ($('.taskDescription').find('textarea').val() != '') {
-            console.log($('.taskDescription').find('textarea').val());
             var formData = new FormData();
             var csrfTokenValue = $('.taskDescription').find('[name=csrfmiddlewaretoken]').val()
     
@@ -31,7 +31,7 @@ function setDescription() {
             formData.append('taskId', $('.taskDescription').find('textarea').attr('task-id'));
             formData.append('taskDescription', $('.taskDescription').find('textarea').val());
     
-            const request = new Request('/task/set_description/', {method: 'POST', body: formData, headers: {'X-CSRFToken': csrfTokenValue}});
+            const request = new Request('/task/set_task_description/', {method: 'POST', body: formData, headers: {'X-CSRFToken': csrfTokenValue}});
     
             // send the request to the server
             fetch(request)
@@ -60,9 +60,9 @@ function setDescription() {
     });
 }
 
-function addStep() {
+function initAddStep() {
     // this function add a step to a task on press enter and on click on add
-    $('.addStep').find('i').click(function() { 
+    $('.addStep').find('i').click(function() {
         if ($('.addStep').find('input[type=text]').val() != '') {
             var formData = new FormData();
             var csrfTokenValue = $('.addStep').find('[name=csrfmiddlewaretoken]').val()
@@ -78,38 +78,39 @@ function addStep() {
             .then(response => response.json())
             .then(result => {
                 $("div.list-item:last").before(`
-                <div class="list-item">
+                <div class="list-item" id="` + result['stepId'] + `">
                     <span>` + result['stepName'] + `</span>
                     <span>
                         <b class="` + result['stepId'] + `">` + result['stepStatus'] + `</b>
                         <i class="fi fi-rr-angle-small-down task-status">
-                            <div class="popup">
-                                <span class="ajax-set-step-status">
-                                    <i class="fi fi-sr-exclamation red"></i>
-                                    <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Bloqué">
-                                </span>
-                                <span class="ajax-set-step-status" >
-                                    <i class="fi fi-sr-clock yellow"></i>
-                                    <input id="` + result['stepId'] + `" data-url="/task/set_step_status/"type="submit" value="En cours">
-                                </span>
-                                <span class="ajax-set-step-status">
-                                    <i class="fi fi-sr-checkbox green"></i>
-                                    <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Terminé">
-                                </span>
-                                <div class="separator"></div>
-                                <span class="ajax-set-step-status">
-                                    <input id="` + result['stepId'] + `" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Supprimer">
-                                </span>
-                            </div>
+                        <div class="popup">
+                        <span class="ajax-set-step-status">
+                            <i class="fi fi-sr-exclamation red"></i>
+                            <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Bloqué">
+                        </span>
+                        <span class="ajax-set-step-status" >
+                            <i class="fi fi-sr-clock yellow"></i>
+                            <input id="` + result['stepId'] + `" data-url="/task/set_step_status/"type="submit" value="En cours">
+                        </span>
+                        <span class="ajax-set-step-status">
+                            <i class="fi fi-sr-checkbox green"></i>
+                            <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Terminé">
+                        </span>
+                        <div class="separator"></div>
+                            <span class="ajax-set-step-status">
+                                <input id="` + result['stepId'] + `" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Supprimer">
+                            </span>
+                        </div>
                         </i>
                         <i icon="` + result['stepId'] + `" class="fi fi-rr-square"></i>
                         <i class="fi fi-rr-menu-dots"></i>
                     </span>
                 </div>`);
-                setUpPopups();
-                initTask();
                 $('.addStep').find('input[type=text]').val('');
                 $('.addStep').find('input[type=text]').focus();
+                $('span.progressBar').find('div.progressValue').attr('value', result['progress']);
+                setUpPopups();
+                initTask();
             })
             .catch(error => {
                 console.log(error)
@@ -129,7 +130,7 @@ function addStep() {
 }
 
 function setStepStatus() {
-    $('.ajax-set-step-status').click(
+    $('.set-step-status').click(
         function() {
             if ($(this).find('input').val() == "Supprimer") {
                 // delete the step if input value clicked is Supprimer
@@ -181,6 +182,57 @@ function setStepStatus() {
         }
     )
 }
+
+
+function setTaskStatus() {
+    $('.set-task-status').click(
+        function() {
+            if ($(this).find('input').val() == "Supprimer") {
+                // delete the step if input value clicked is Supprimer
+                var formData = new FormData();
+
+                // add values to formData
+                formData.append('task', $(this).find('input').attr('id'));
+    
+                const request = new Request('/task/delete_task/', {method: 'POST', body: formData});
+    
+                // send the request to the server
+                fetch(request)
+                .then(response => response.json())
+                .then(result => {
+                    window.location.replace(result['url']);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            } else {
+                // set status to selected
+                var formData = new FormData();
+
+                // add values to formData
+                formData.append('task', $(this).find('input').attr('id'));
+                formData.append('status', $(this).find('input').val());
+    
+                const request = new Request('/task/set_task_status/', {method: 'POST', body: formData});
+    
+                // send the request to the server
+                fetch(request)
+                .then(response => response.json())
+                .then(result => {
+                    if (result['status'] == "Ouvert") {
+                        $('.taskStatus').removeClass().addClass("taskStatus fi fi-ss-circle-small blue");
+                    } else {
+                        $('.taskStatus').removeClass().addClass("taskStatus fi fi-ss-circle-small green");
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            }
+        }
+    )
+}
+
 
 // this function update the progress bar given in parameter
 function updateProgressBar(element, progress) {

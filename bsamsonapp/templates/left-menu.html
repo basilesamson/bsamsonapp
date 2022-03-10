@@ -2,7 +2,7 @@
     <section>
         {% if user.is_authenticated %}
         <section class="user">
-            <h2>{{ user.first_name | title }} {{ user.last_name | upper }} <i class="fi fi-rr-angle-small-down"></i></h2>
+            <h2>{{ user | title }} <i class="fi fi-rr-angle-small-down"></i></h2>
             <div class="popup">
                 <a href=""><i class="fi fi-rr-user"></i>Voir le profil</a>
                 <a href=""><i class="fi fi-rr-paper-plane"></i>Inviter des collaborateurs</a>

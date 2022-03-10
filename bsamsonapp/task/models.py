@@ -4,7 +4,6 @@ class Task(models.Model):
     class Status(models.TextChoices):
         OPEN = 'Ouvert'
         CLOSED = 'Fermé'
-        IN_PROGRESS = 'En cours'
 
     name = models.fields.CharField('Nom', max_length=100)
     description = models.fields.CharField('Description', blank=True, null=True, max_length=500)
@@ -14,6 +13,14 @@ class Task(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def getProgress(self):
+        try:
+            self.progress = int(Step.objects.filter(task=self).filter(status="Terminé").count() / Step.objects.filter(task=self).count() * 100)
+        except:
+            self.progress = 0
+        self.save()
+        return self.progress
 
     class Meta:
         ordering = ['project', 'name', 'status']

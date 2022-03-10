@@ -3,13 +3,12 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
+from dashboard.views import index
 from task.models import Task, Step
 
 def task(request, task_id):
     try:
-        task = Task.objects.get(pk=task_id)
-        task.progress = int(Step.objects.filter(task=task).filter(status="Terminé").count() / Step.objects.filter(task=task).count() * 100)
-        task.save()
+        Task.objects.get(pk=task_id).getProgress()
     except:
         pass
 
@@ -19,6 +18,26 @@ def task(request, task_id):
     }
 
     return render(request, 'task/index.html', context)
+
+@csrf_exempt
+def deleteTask(request):
+    task = Task.objects.get(pk=request.POST.get("task"))
+    task.delete()
+
+    return JsonResponse({
+        "status": "task succesfully deleted",
+        "url": "/",
+    })
+
+@csrf_exempt
+def setStatus(request):
+    task = Task.objects.get(pk=request.POST.get("task"))
+    task.status = request.POST.get("status")
+    task.save()
+
+    return JsonResponse({
+        "status": task.status,
+    })
 
 def setDescription(request):
     task = Task.objects.get(pk=request.POST.get("taskId"))
@@ -30,33 +49,29 @@ def setDescription(request):
     })
 
 def addStep(request):
-    step = Step.objects.create(name=request.POST.get("stepName"), task=Task.objects.get(pk=request.POST.get("taskId")))
-    step.save()
-
-    task = Task.objects.get(name=step.task)
-    task.progress = int(Step.objects.filter(task=task).filter(status="Terminé").count() / Step.objects.filter(task=task).count() * 100)
-    task.save()
+    try:
+        Step.objects.get(name=request.POST.get("stepName"), task=Task.objects.get(pk=request.POST.get("taskId")))
+        print('already exist')
+        return JsonResponse({ "error": "Step already exist" })
+    except:
+        step = Step.objects.create(name=request.POST.get("stepName"), task=Task.objects.get(pk=request.POST.get("taskId")))
+        step.save()
 
     return JsonResponse({
         "stepId": step.pk,
         "stepName": step.name,
         "stepStatus": step.status,
-        "progress": task.progress,
+        "progress": Task.objects.get(name=step.task).getProgress(),
     })
 
 @csrf_exempt
 def deleteStep(request):
     step = Step.objects.get(pk=request.POST.get("step"))
-    task = Task.objects.get(name=step.task)
-
     step.delete()
-
-    task.progress = int(Step.objects.filter(task=task).filter(status="Terminé").count() / Step.objects.filter(task=task).count() * 100)
-    task.save()
 
     return JsonResponse({
         "status": "step succesfully deleted",
-        "progress": task.progress,
+        "progress": Task.objects.get(name=step.task).getProgress(),
     })
 
 @csrf_exempt
@@ -65,11 +80,7 @@ def setStepStatus(request):
     step.status = request.POST.get("status")
     step.save()
 
-    task = Task.objects.get(name=step.task)
-    task.progress = int(Step.objects.filter(task=task).filter(status="Terminé").count() / Step.objects.filter(task=task).count() * 100)
-    task.save()
-
     return JsonResponse({
         "status": step.status,
-        "progress": task.progress,
+        "progress": Task.objects.get(name=step.task).getProgress(),
     })
