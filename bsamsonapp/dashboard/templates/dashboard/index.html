@@ -4,15 +4,21 @@
 <section>
     <h2>Tâches <a href="{% url 'task:addTask' %}"><i class="fi fi-rr-add"></i></a></h2>
     <div class="tasks widget">
-        {% for task in tasks %}
-        <a href="{% url 'task:task' task.id %}">
-            <span>{{ task.name }}</span>
-            <span class="progressBar">
-                <b></b>
-                <div class="progressContainer"><div class="progressValue" value="{{ task.progress }}"></div></div>
-              </span>
-        </a>
-        {% endfor %}
+        {% if tasks|length == 0 %}
+            <span class="nothingToDraw">
+                Oh il semblerai que tu n'es rien à faire pour le moment, clique sur le<i class="fi fi-rr-add"></i>juste au dessus pour créer une nouvelle tâche !
+            </span>
+        {% else %}
+            {% for task in tasks %}
+            <a href="{% url 'task:task' task.id %}">
+                <span>{{ task.name }}</span>
+                <span class="progressBar">
+                    <b></b>
+                    <div class="progressContainer"><div class="progressValue" value="{{ task.progress }}"></div></div>
+                </span>
+            </a>
+            {% endfor %}
+        {% endif %}
     </div>
 </section>
 {% endblock %}
