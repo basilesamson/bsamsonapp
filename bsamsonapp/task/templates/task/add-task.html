@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="widget form">
+    <h2>Créer une tâche</h2>
+    <form action="{% url 'task:addTask' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <div>
+            <a></a>
+            <button class="button callToAction" type="submit">Créer</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

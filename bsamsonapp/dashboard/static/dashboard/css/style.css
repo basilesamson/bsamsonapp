@@ -153,7 +153,8 @@ textarea {
     border-radius: .5em;
     box-shadow: 0 .5em 5em #00000016;
 }
-.popup a ,.popup input {
+.popup a , .popup input {
+    cursor: pointer;
     font-size: 1em;
     padding: .5em;
 }
@@ -178,9 +179,11 @@ textarea {
     cursor: pointer;
     padding: .5em 2em;
     border-radius: .5em;
-    background: #07ecaf;
+    background: #06D7A0;
+    color: #FFFFFF;
+    font-weight: 600;
 }
 .callToAction:hover {
-    background: #06d79f;
-    color: #000000;
+    background: #06b888;
+    color: #FFFFFF;
 }

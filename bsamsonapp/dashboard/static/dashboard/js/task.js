@@ -84,20 +84,20 @@ function initAddStep() {
                         <b class="` + result['stepId'] + `">` + result['stepStatus'] + `</b>
                         <i class="fi fi-rr-angle-small-down task-status">
                         <div class="popup">
-                        <span class="ajax-set-step-status">
+                        <span class="set-step-status">
                             <i class="fi fi-sr-exclamation red"></i>
                             <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Bloqué">
                         </span>
-                        <span class="ajax-set-step-status" >
+                        <span class="set-step-status" >
                             <i class="fi fi-sr-clock yellow"></i>
                             <input id="` + result['stepId'] + `" data-url="/task/set_step_status/"type="submit" value="En cours">
                         </span>
-                        <span class="ajax-set-step-status">
+                        <span class="set-step-status">
                             <i class="fi fi-sr-checkbox green"></i>
                             <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Terminé">
                         </span>
                         <div class="separator"></div>
-                            <span class="ajax-set-step-status">
+                            <span class="set-step-status">
                                 <input id="` + result['stepId'] + `" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Supprimer">
                             </span>
                         </div>

@@ -2,7 +2,7 @@
 
 {% block content %}
 <section>
-    <h2>Tâches</h2>
+    <h2>Tâches <a href="{% url 'task:addTask' %}"><i class="fi fi-rr-add"></i></a></h2>
     <div class="tasks widget">
         {% for task in tasks %}
         <a href="{% url 'task:task' task.id %}">
@@ -10,7 +10,7 @@
             <span class="progressBar">
                 <b></b>
                 <div class="progressContainer"><div class="progressValue" value="{{ task.progress }}"></div></div>
-            </span>
+              </span>
         </a>
         {% endfor %}
     </div>

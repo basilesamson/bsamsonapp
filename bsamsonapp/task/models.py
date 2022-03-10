@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Task(models.Model):
     class Status(models.TextChoices):
@@ -13,6 +14,10 @@ class Task(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+    def delete(self):
+        Step.objects.filter(task=self).delete()
+        super(Task, self).delete()
 
     def getProgress(self):
         try:

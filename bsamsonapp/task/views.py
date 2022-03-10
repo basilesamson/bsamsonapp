@@ -1,10 +1,11 @@
 from multiprocessing import context
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
 from dashboard.views import index
 from task.models import Task, Step
+from task.forms import TaskForm
 
 def task(request, task_id):
     try:
@@ -19,10 +20,20 @@ def task(request, task_id):
 
     return render(request, 'task/index.html', context)
 
+def addTask(request):
+    form = TaskForm()
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = Task.objects.create(name=request.POST.get("name"))
+            task.save()
+            return redirect('/task/{}'.format(task.id))
+    return render(request, 'task/add-task.html', context={'form': form})
+
+
 @csrf_exempt
 def deleteTask(request):
-    task = Task.objects.get(pk=request.POST.get("task"))
-    task.delete()
+    Task.objects.get(pk=request.POST.get("task")).delete()
 
     return JsonResponse({
         "status": "task succesfully deleted",
@@ -51,7 +62,6 @@ def setDescription(request):
 def addStep(request):
     try:
         Step.objects.get(name=request.POST.get("stepName"), task=Task.objects.get(pk=request.POST.get("taskId")))
-        print('already exist')
         return JsonResponse({ "error": "Step already exist" })
     except:
         step = Step.objects.create(name=request.POST.get("stepName"), task=Task.objects.get(pk=request.POST.get("taskId")))
@@ -66,8 +76,7 @@ def addStep(request):
 
 @csrf_exempt
 def deleteStep(request):
-    step = Step.objects.get(pk=request.POST.get("step"))
-    step.delete()
+    Step.objects.get(pk=request.POST.get("step")).delete()
 
     return JsonResponse({
         "status": "step succesfully deleted",
