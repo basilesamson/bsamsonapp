@@ -10,15 +10,15 @@
           <div class="popup">
             <div class="set-task-status">
               <i class="fi fi-ss-circle blue"></i>
-              <input id="{{ task.id }}" data-url="{% url 'task:setTaskStatus' %}" type="submit" value="Ouvert">
+              <input id="{{ task.id }}" type="submit" value="Ouvert">
             </div>
             <div class="set-task-status">
               <i class="fi fi-ss-circle green"></i>
-              <input id="{{ task.id }}" data-url="{% url 'task:setTaskStatus' %}" type="submit" value="Fermé">
+              <input id="{{ task.id }}" type="submit" value="Fermé">
             </div>
             <div class="separator"></div>
             <div class="set-task-status">
-              <input id="{{ task.id }}" data-url="{% url 'task:deleteTask' %}" type="submit" value="Supprimer">
+              <input id="{{ task.id }}" type="submit" value="Supprimer">
             </div>
           </div>
         </i>
@@ -30,11 +30,12 @@
       </span>
     </h1>
     <br>
-    <section class="taskDescription">
+    <section class="description taskDescription">
       <h2>Description</h2>
       <form>
         {% csrf_token %}
         <textarea maxlength="500" task-id="{{ task.id }}" task-description="{{ task.description }}" type="text" placeholder="Ajouter une description"></textarea>
+        <input type="hidden">
         <div>Press enter to save</div>
       </form>
     </section>
@@ -61,19 +62,19 @@
             <div class="popup">
               <span class="set-step-status">
                 <i class="fi fi-sr-exclamation red"></i>
-                <input id="{{ step.id }}" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Bloqué">
+                <input id="{{ step.id }}" type="submit" value="Bloqué">
               </span>
               <span class="set-step-status">
                 <i class="fi fi-sr-clock yellow"></i>
-                <input id="{{ step.id }}" data-url="{% url 'task:setStepStatus' %}" type="submit" value="En cours">
+                <input id="{{ step.id }}" type="submit" value="En cours">
               </span>
               <span class="set-step-status">
                 <i class="fi fi-sr-checkbox green"></i>
-                <input id="{{ step.id }}" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Terminé">
+                <input id="{{ step.id }}" type="submit" value="Terminé">
               </span>
               <div class="separator"></div>
               <span class="set-step-status">
-                <input id="{{ step.id }}" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Supprimer">
+                <input id="{{ step.id }}" type="submit" value="Supprimer">
               </span>
             </div>
           </i>

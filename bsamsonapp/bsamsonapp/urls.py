@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.conf.urls.static import static
 
 from dashboard import views
 
@@ -24,4 +26,4 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('', login_required(views.index)),
     path('task/', include('task.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

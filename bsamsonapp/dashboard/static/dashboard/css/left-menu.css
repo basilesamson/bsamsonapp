@@ -31,7 +31,10 @@
 .left-menu h2 {
     justify-content: space-between;
 }
-
+.left-menu h2 span {
+    display: flex;
+    align-items: center;
+}
 #menu {
     margin-top: 5em;
 }

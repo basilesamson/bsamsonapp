@@ -5,7 +5,7 @@ from task.models import Task
 
 def index(request):
     context = { 
-        'tasks' : Task.objects.all()
+        'tasks' : Task.objects.filter(status='Ouvert')
     }
     
     return render(request, 'dashboard/index.html', context)

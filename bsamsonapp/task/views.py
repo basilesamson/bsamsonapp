@@ -8,10 +8,7 @@ from task.models import Task, Step
 from task.forms import TaskForm
 
 def task(request, task_id):
-    try:
-        Task.objects.get(pk=task_id).getProgress()
-    except:
-        pass
+    Task.objects.get(pk=task_id).getProgress()
 
     context = { 
         'task' : Task.objects.get(pk=task_id),

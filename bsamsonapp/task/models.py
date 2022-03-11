@@ -28,7 +28,7 @@ class Task(models.Model):
         return self.progress
 
     class Meta:
-        ordering = ['project', 'name', 'status']
+        ordering = ['project', 'id', 'status']
 
 
 class Step(models.Model):

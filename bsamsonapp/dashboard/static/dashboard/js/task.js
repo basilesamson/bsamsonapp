@@ -23,26 +23,25 @@ function setDescription() {
     }
 
     $('.taskDescription').find('input').click(function() {
-        if ($('.taskDescription').find('textarea').val() != '') {
-            var formData = new FormData();
-            var csrfTokenValue = $('.taskDescription').find('[name=csrfmiddlewaretoken]').val()
-    
-            // add values to formData
-            formData.append('taskId', $('.taskDescription').find('textarea').attr('task-id'));
-            formData.append('taskDescription', $('.taskDescription').find('textarea').val());
-    
-            const request = new Request('/task/set_task_description/', {method: 'POST', body: formData, headers: {'X-CSRFToken': csrfTokenValue}});
-    
-            // send the request to the server
-            fetch(request)
-            .then(response => response.json())
-            .then(result => {
-                $('.taskDescription').find('textarea').blur();
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        }
+        var formData = new FormData();
+        var csrfTokenValue = $('.taskDescription').find('[name=csrfmiddlewaretoken]').val()
+
+        // add values to formData
+        formData.append('taskId', $('.taskDescription').find('textarea').attr('task-id'));
+        formData.append('taskDescription', $('.taskDescription').find('textarea').val());
+
+        const request = new Request('/task/set_task_description/', {method: 'POST', body: formData, headers: {'X-CSRFToken': csrfTokenValue}});
+
+        // send the request to the server
+        fetch(request)
+        .then(response => response.json())
+        .then(result => {
+            $('.taskDescription').find('textarea').val(result['taskDescription']);
+            $('.taskDescription').find('textarea').blur()
+        })
+        .catch(error => {
+            console.log(error)
+        })
     })
 
     // remove all \n of the description textarea
@@ -86,19 +85,19 @@ function initAddStep() {
                         <div class="popup">
                         <span class="set-step-status">
                             <i class="fi fi-sr-exclamation red"></i>
-                            <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Bloqué">
+                            <input id="` + result['stepId'] + `" type="submit" value="Bloqué">
                         </span>
                         <span class="set-step-status" >
                             <i class="fi fi-sr-clock yellow"></i>
-                            <input id="` + result['stepId'] + `" data-url="/task/set_step_status/"type="submit" value="En cours">
+                            <input id="` + result['stepId'] + `"type="submit" value="En cours">
                         </span>
                         <span class="set-step-status">
                             <i class="fi fi-sr-checkbox green"></i>
-                            <input id="` + result['stepId'] + `" data-url="/task/set_step_status/" type="submit" value="Terminé">
+                            <input id="` + result['stepId'] + `" type="submit" value="Terminé">
                         </span>
                         <div class="separator"></div>
                             <span class="set-step-status">
-                                <input id="` + result['stepId'] + `" data-url="{% url 'task:setStepStatus' %}" type="submit" value="Supprimer">
+                                <input id="` + result['stepId'] + `" type="submit" value="Supprimer">
                             </span>
                         </div>
                         </i>

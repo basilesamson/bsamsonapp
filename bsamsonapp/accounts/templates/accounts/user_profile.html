@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section>
+    <div class="widget userProfile">
+        <span>
+            {% if user.id == userProfile.user.id %}
+            <span class="editable">
+                <img class="userPictureBig" src="/{{ userProfile.picture }}">
+                <i class="fi fi-sr-pencil set-user-picture">
+                    <div class="popup">
+                        <form action="{% url 'accounts:userProfile' user.id %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                        </form>
+                    </div>
+                </i>
+            </span>
+            {% else %}
+            <img class="userPictureBig" src="/{{ userProfile.picture }}">
+            {% endif %}
+            <h1>{{ userProfile|title }}</h1>
+        </span>
+        <br>
+        <section class="description userDescription">
+            <h2>Description</h2>
+            {% if user.id == userProfile.user.id %}
+            <form>
+                {% csrf_token %}
+                <textarea maxlength="500" user-id="{{ user.id }}" user-description="{{ userProfile.description }}" type="text" placeholder="Ajouter une description"></textarea>
+                <div>Press enter to save</div>
+            </form>
+            {% else %}
+            <textarea maxlength="500" user-id="{{ user.id }}" user-description="{{ userProfile.description }}" type="text" placeholder="Pas de description" readonly></textarea>
+            {% endif %}
+        </section>
+    </div>
+</section>
+
+{% endblock %}

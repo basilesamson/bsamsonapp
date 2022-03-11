@@ -153,6 +153,9 @@ textarea {
     border-radius: .5em;
     box-shadow: 0 .5em 5em #00000016;
 }
+form {
+    margin-block-end: 0;
+}
 .popup a , .popup input {
     cursor: pointer;
     font-size: 1em;
@@ -186,4 +189,30 @@ textarea {
 .callToAction:hover {
     background: #06b888;
     color: #FFFFFF;
+}
+
+
+.userPicture {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 .5em 0 0;
+    border-radius: 50%;
+}
+.userPictureBig {
+    width: 5em;
+    height: 5em;
+    margin: 0 1em 0 0;
+    border-radius: 50%;
+}
+
+.editable {
+    position: relative;
+    margin: 0 1em 0 0;
+}
+
+.editable i {
+    position: absolute;
+    bottom: 0em;
+    right: 0em;
+    cursor: pointer;
 }
