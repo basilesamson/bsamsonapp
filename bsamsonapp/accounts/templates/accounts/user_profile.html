@@ -2,40 +2,103 @@
 
 {% block content %}
 
+<section class="widget userProfile">
+    <span>
+        <span class="editable">
+            <img class="userPictureBig" src="/{{ userProfile.picture }}">
+            {% if user.id == userProfile.user.id %}
+                <i class="fi fi-sr-pencil set-user-picture">
+                    <div class="hidden">
+                        <form action="{% url 'accounts:userProfile' user.id %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form }}
+                        </form>
+                    </div>
+                </i>
+            {% endif %}
+            </span>
+        <h1>{{ userProfile|title }}</h1>
+    </span>
+    <br>
+    <section class="description userDescription">
+        <h2>Description</h2>
+        {% if user.id == userProfile.user.id %}
+            <form>
+                {% csrf_token %}
+                <textarea maxlength="500" user-id="{{ user.id }}" user-description="{{ userProfile.description }}" type="text" placeholder="Ajouter une description"></textarea>
+                <input type="hidden">
+                <div>Press enter to save</div>
+            </form>
+        {% else %}
+            <textarea maxlength="500" user-id="{{ user.id }}" user-description="{{ userProfile.description }}" type="text" placeholder="Pas de description" readonly></textarea>
+        {% endif %}
+    </section>
+</section>
+
 <section>
-    <div class="widget userProfile">
-        <span>
+    <h2>Projets {% if user.id == userProfile.user.id %}<a href="{% url 'dashboard:addProject' %}"><i class="fi fi-rr-add"></i></a>{% endif %}</h2>
+    {% if projects|length == 0 %}
+        <div class="widget">
             {% if user.id == userProfile.user.id %}
-                <span class="editable">
-                    <img class="userPictureBig" src="/{{ userProfile.picture }}">
-                    <i class="fi fi-sr-pencil set-user-picture">
-                        <div class="popup">
-                            <form action="{% url 'accounts:userProfile' user.id %}" method="post" enctype="multipart/form-data">
-                                {% csrf_token %}
-                                {{ form }}
-                            </form>
-                        </div>
-                    </i>
-                </span>
+            <span class="nothingToDraw">Oh il semblerait que tu n'es rien à faire pour le moment, clique sur le<i class="fi fi-rr-add"></i>juste au dessus pour ajouter un projet !</span>
             {% else %}
-                <img class="userPictureBig" src="/{{ userProfile.picture }}">
+            <span class="nothingToDraw">Oh on dirait bien que {{ userProfile|title }} n'a malheureusement pas encore de projet.</span>
             {% endif %}
-            <h1>{{ userProfile|title }}</h1>
-        </span>
-        <br>
-        <section class="description userDescription">
-            <h2>Description</h2>
+        </div>
+    {% else %}
+        <div class="cards">
+            {% for project in projects %}
+            <a class="card" href="{{ project.id }}">
+                <img class="" src="/{{ project.picture }}">
+                <h2>{{ project.name }}</h2>
+                <p>{{ project.description }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+<section>
+    <h2>Compétences {% if user.id == userProfile.user.id %}<a href=""><i class="fi fi-rr-add"></i></a>{% endif %}</h2>
+    <div class="skills widget">
+        {% if skills|length == 0 %}
             {% if user.id == userProfile.user.id %}
-                <form>
-                    {% csrf_token %}
-                    <textarea maxlength="500" user-id="{{ user.id }}" user-description="{{ userProfile.description }}" type="text" placeholder="Ajouter une description"></textarea>
-                    <div>Press enter to save</div>
-                </form>
-            {% else %}
-                <textarea maxlength="500" user-id="{{ user.id }}" user-description="{{ userProfile.description }}" type="text" placeholder="Pas de description" readonly></textarea>
+                <span class="nothingToDraw">T'as forcément au moins une compétence, clique sur le<i class="fi fi-rr-add"></i>et ajoutes en !</span>
+                {% else %}
+                <span class="nothingToDraw">{{ userProfile|title }} n'a pas renseigné ces compétences pour l'instant.. &#x1F622;</span>
             {% endif %}
-        </section>
+        {% else %}
+            {% for skill in skills %}
+            <a class="skill">
+                <h2>{{ skill.name }}</h2>
+            </a>
+            {% endfor %}
+        {% endif %}
     </div>
+</section>
+
+<section>
+    <h2>Formations {% if user.id == userProfile.user.id %}<a href="{% url 'dashboard:addFormation' %}"><i class="fi fi-rr-add"></i></a>{% endif %}</h2>
+    {% if formations|length == 0 %}
+        <div class="widget">
+            {% if user.id == userProfile.user.id %}
+            <span class="nothingToDraw">Tu vas pas me faire croire que t'es pas formé à quelque chose, clique vite sur le<i class="fi fi-rr-add"></i>pour mettre à jour tes formations !</span>
+            {% else %}
+            <span class="nothingToDraw">{{ userProfile|title }} n'a aucune formation de référencer sur le site. Essaye peut être son linkedIn &#x1F937;</span>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="cards">
+            {% for formation in formations %}
+            <a class="card" href="{{ formation.id }}">
+                <img class="" src="/{{ formation.picture }}">
+                <img class="cardLogo" src="/{{ formation.logo }}">
+                <h2>{{ formation.name }}</h2>
+                <p>{{ formation.description }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    {% endif %}
 </section>
 
 {% endblock %}

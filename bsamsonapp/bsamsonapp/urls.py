@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 from dashboard import views
 
 urlpatterns = [
+    path('', login_required(views.index)),
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
-    path('', login_required(views.index)),
+    path('dashboard/', include('dashboard.urls')),
     path('task/', include('task.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

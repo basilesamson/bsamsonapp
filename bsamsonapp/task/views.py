@@ -22,7 +22,9 @@ def addTask(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = Task.objects.create(name=request.POST.get("name"))
+            task = Task.objects.create(name=request.POST.get("name"), description=request.POST.get("description"))
+            # print(request.POST.get("users"))
+            # task.user = request.POST.get("user")
             task.save()
             return redirect('/task/{}'.format(task.id))
     return render(request, 'task/add-task.html', context={'form': form})

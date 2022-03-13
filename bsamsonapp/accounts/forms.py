@@ -3,8 +3,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.validators import UnicodeUsernameValidator as username_validator
 
-from accounts.models import UserProfile
-
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=63, widget=forms.TextInput(attrs={"placeholder": "Nom d'utilisateur"}))
     password = forms.CharField(max_length=63, widget=forms.PasswordInput(attrs={"placeholder": "Mot de passe"}))

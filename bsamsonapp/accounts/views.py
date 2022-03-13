@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from accounts.models import User, UserProfile
+from dashboard.models import Project, Skill, Formation
 from accounts.forms import LoginForm, SignupForm, UserPictureForm
 from bsamsonapp.utils import *
 
@@ -55,6 +56,9 @@ def user_profile(request, user_id):
 
     context = { 
         'userProfile' : userProfile,
+        'projects': Project.objects.filter(user=User.objects.get(pk=user_id)),
+        'skills': Skill.objects.filter(user=User.objects.get(pk=user_id)),
+        'formations': Formation.objects.filter(user=User.objects.get(pk=user_id)),
         'form' : UserPictureForm()
     }
 
@@ -66,8 +70,6 @@ def user_profile(request, user_id):
             userProfile.picture = handle_uploaded_file(filePath, request.FILES['file'])
             userProfile.save()
             context['userProfile'] = userProfile
-            
-            return render(request, 'accounts/user_profile.html', context)
 
     return render(request, 'accounts/user_profile.html', context)
 
@@ -79,14 +81,3 @@ def set_user_description(request):
     return JsonResponse({
         "userProfileDescription": userProfile.description,
     })
-
-def set_user_picture(request):
-    print(request.POST)
-    print(request.POST.get["userPicture"])
-    # userProfile = UserProfile.objects.get(pk=request.POST.get("userId"))
-    # userProfile.picture = request.POST.get("userPicture")
-    # userProfile.save()
-
-    # return JsonResponse({
-    #     "userProfilePicture": userProfile.picture,
-    # })

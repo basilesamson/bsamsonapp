@@ -12,6 +12,9 @@ function setPicture() {
     $('.set-user-picture').find('input[type=file]').change(function() {
         $('.set-user-picture').find('form').submit();
     });
+    document.querySelector('i.set-user-picture').addEventListener('click', () => {
+        document.querySelector('input[type=file]').click()
+    })
 }
 
 function setDescription() {
@@ -34,8 +37,8 @@ function setDescription() {
         fetch(request)
         .then(response => response.json())
         .then(result => {
-            $('.userDescription').find('textarea').val(request['userProfileDescription']);
             $('.userDescription').find('textarea').blur();
+            console.log(result['userProfileDescription']);
         })
         .catch(error => {
             console.log(error)

@@ -76,14 +76,15 @@ h2 i:hover {
 p {
     font-size: 1.1em;
 }
-input {
+input, select {
     background: none;
     border: none;
+    height: auto;
     font-size: 1em;
     padding: .5em;
     text-align: left;
 }
-input:hover, a:focus {
+input:hover, a:focus, select:focus {
     outline: none;
     border: none;
     color: #06D7A0;
@@ -142,6 +143,10 @@ textarea {
     background: #ECECEC;
 }
 
+.hidden {
+    display: none;
+}
+
 .popup {
     font-size: 16px;
     padding: .5em;
@@ -195,19 +200,20 @@ form {
 .userPicture {
     width: 1.5em;
     height: 1.5em;
+    object-fit: cover;
     margin: 0 .5em 0 0;
     border-radius: 50%;
 }
 .userPictureBig {
     width: 5em;
     height: 5em;
+    object-fit: cover;
     margin: 0 1em 0 0;
     border-radius: 50%;
 }
 
 .editable {
     position: relative;
-    margin: 0 1em 0 0;
 }
 
 .editable i {

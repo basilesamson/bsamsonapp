@@ -16,5 +16,4 @@ urlpatterns = [
 
     path('profile/<int:user_id>/', views.user_profile, name='userProfile'),
     path('profile/set_user_description/', views.set_user_description, name='setUserDescription'),
-    path('profile/set_user_picture/', views.set_user_picture, name='setUserPicture'),
 ]
