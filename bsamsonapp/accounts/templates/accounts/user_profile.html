@@ -92,7 +92,9 @@
             {% for formation in formations %}
             <a class="card" href="{{ formation.id }}">
                 <img class="" src="/{{ formation.picture }}">
+                {% if formation.logo %}
                 <img class="cardLogo" src="/{{ formation.logo }}">
+                {% endif %}
                 <h2>{{ formation.name }}</h2>
                 <p>{{ formation.description }}</p>
             </a>

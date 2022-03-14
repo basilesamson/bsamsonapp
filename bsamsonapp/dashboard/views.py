@@ -1,11 +1,13 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from bsamsonapp.utils import handle_uploaded_file
 
 from task.models import Task
 from dashboard.models import Project, Skill, Formation
 from dashboard.forms import ProjectForm, SkillForm, FormationForm
 
+@login_required
 def index(request):
     context = { 
         'tasks' : Task.objects.filter(status='Ouvert')
@@ -13,6 +15,7 @@ def index(request):
     
     return render(request, 'dashboard/index.html', context)
 
+@login_required
 def addProject(request):
     form = ProjectForm()
     if request.method == 'POST':
@@ -29,6 +32,7 @@ def addProject(request):
 
     return render(request, 'dashboard/add_project.html', context={'form': form})
 
+@login_required
 def addFormation(request):
     form = FormationForm()
     if request.method == 'POST':
@@ -40,9 +44,12 @@ def addFormation(request):
             picturePath = 'media/formations/formation_{}.{}'.format(formation.id, pictureExtension)
             formation.picture = handle_uploaded_file(picturePath, request.FILES['picture'])
 
-            logoExtension = request.FILES['logo'].content_type.rsplit('/', 1)[-1]
-            logoPath = 'media/logos/logo_{}.{}'.format(formation.id, logoExtension)
-            formation.logo = handle_uploaded_file(logoPath, request.FILES['logo'])
+            try:
+                logoExtension = request.FILES['logo'].content_type.rsplit('/', 1)[-1]
+                logoPath = 'media/logos/logo_{}.{}'.format(formation.id, logoExtension)
+                formation.logo = handle_uploaded_file(logoPath, request.FILES['logo'])
+            except:
+                pass
 
             formation.description = request.POST.get("description")
             formation.save()
