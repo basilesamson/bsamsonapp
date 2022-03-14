@@ -4,9 +4,10 @@
 *.pyc
 __pycache__
 db.sqlite3
-bsamsonapp/media/**/*.png
-bsamsonapp/media/**/*.jpg
-bsamsonapp/media/**/*.jpeg
+*.png
+!default.png
+*.jpg
+*.jpeg
 
 # Backup files # 
 *.bak 
