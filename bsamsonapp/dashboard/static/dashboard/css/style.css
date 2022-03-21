@@ -76,6 +76,9 @@ h2 i:hover {
 p {
     font-size: 1.1em;
 }
+option {
+    display: block;
+}
 input, select {
     background: none;
     border: none;

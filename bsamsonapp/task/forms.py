@@ -15,13 +15,8 @@ class TaskForm(forms.ModelForm):
         required=False,
         widget=forms.TextInput(attrs={"placeholder": "Ajouter une description"}),
     )
-    # user = forms.ModelMultipleChoiceField(
-    #     User.objects.all(),
-    #     help_text="CTRL + Clic pour choisir plusieurs personnes.",
-    #     widget=forms.SelectMultiple(attrs={"size": User.objects.all().count()})
-    # )
 
     class Meta:
         model = Task
-        fields = ['name', 'description']
-        # fields = ['name', 'description', 'user']
+        # fields = ['name', 'description']
+        fields = ['name', 'description', 'users']

@@ -1,3 +1,5 @@
+from multiprocessing.sharedctypes import Value
+from turtle import color
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -10,7 +12,7 @@ from dashboard.forms import ProjectForm, SkillForm, FormationForm
 @login_required
 def index(request):
     context = { 
-        'tasks' : Task.objects.filter(status='Ouvert')
+        'tasks' : Task.objects.filter(users=request.user.id)
     }
     
     return render(request, 'dashboard/index.html', context)
@@ -31,6 +33,21 @@ def addProject(request):
             return redirect('/accounts/profile/{}'.format(request.POST.get("userId")))
 
     return render(request, 'dashboard/add_project.html', context={'form': form})
+
+@login_required
+def addSkill(request):
+    form = SkillForm()
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+        if form.is_valid():
+            skill = Skill.objects.create(name=request.POST.get("name"))
+            skill.color = request.POST.get("color")
+            skill.value = request.POST.get("value")
+            skill.user = request.user.id
+            skill.save()
+            return redirect('/accounts/profile/{}'.format(request.user.id))
+
+    return render(request, 'dashboard/add_skill.html', context={'form': form})
 
 @login_required
 def addFormation(request):

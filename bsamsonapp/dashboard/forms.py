@@ -25,14 +25,16 @@ class ProjectForm(forms.ModelForm):
 class SkillForm(forms.ModelForm):
     name = forms.CharField(
         max_length=100,
-        widget=forms.TextInput(attrs={"placeholder": "Nom du projet"}),
+        widget=forms.TextInput(attrs={"placeholder": "Nom de la compètence"}),
     )
     color = forms.FileField(
         widget=forms.TextInput(attrs={'type': 'color'}),
+        help_text="C'est facultatif mais ça mettra un peu de couleur a ton profil !", 
     )
     value = forms.IntegerField(
         max_value=100,
         min_value=0,
+        help_text="Une note entre 0 et 100 qui indique ton pourcentage sur cette compétence.", 
     )
 
     class Meta:

@@ -2,11 +2,13 @@ from multiprocessing import context
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 from dashboard.views import index
 from task.models import Task, Step
 from task.forms import TaskForm
 
+@login_required
 def task(request, task_id):
     Task.objects.get(pk=task_id).getProgress()
 
@@ -17,20 +19,19 @@ def task(request, task_id):
 
     return render(request, 'task/index.html', context)
 
+@login_required
 def addTask(request):
     form = TaskForm()
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = Task.objects.create(name=request.POST.get("name"), description=request.POST.get("description"))
-            # print(request.POST.get("users"))
-            # task.user = request.POST.get("user")
-            task.save()
+            task = form.save()
             return redirect('/task/{}'.format(task.id))
     return render(request, 'task/add-task.html', context={'form': form})
 
 
 @csrf_exempt
+@login_required
 def deleteTask(request):
     Task.objects.get(pk=request.POST.get("task")).delete()
 
@@ -40,6 +41,7 @@ def deleteTask(request):
     })
 
 @csrf_exempt
+@login_required
 def setStatus(request):
     task = Task.objects.get(pk=request.POST.get("task"))
     task.status = request.POST.get("status")
@@ -49,6 +51,7 @@ def setStatus(request):
         "status": task.status,
     })
 
+@login_required
 def setDescription(request):
     task = Task.objects.get(pk=request.POST.get("taskId"))
     task.description = request.POST.get("taskDescription")
@@ -58,6 +61,7 @@ def setDescription(request):
         "taskDescription": task.description,
     })
 
+@login_required
 def addStep(request):
     try:
         Step.objects.get(name=request.POST.get("stepName"), task=Task.objects.get(pk=request.POST.get("taskId")))
@@ -74,6 +78,7 @@ def addStep(request):
     })
 
 @csrf_exempt
+@login_required
 def deleteStep(request):
     Step.objects.get(pk=request.POST.get("step")).delete()
 
@@ -83,6 +88,7 @@ def deleteStep(request):
     })
 
 @csrf_exempt
+@login_required
 def setStepStatus(request):
     step = Step.objects.get(pk=request.POST.get("step"))
     step.status = request.POST.get("status")

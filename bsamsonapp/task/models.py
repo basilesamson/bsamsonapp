@@ -11,6 +11,7 @@ class Task(models.Model):
     project = models.fields.CharField('Projet', blank=True, max_length=100)
     progress = models.fields.IntegerField('Progression', default=0)
     status = models.fields.CharField('Status', default=Status.OPEN, choices=Status.choices, max_length=20)
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return f'{self.name}'

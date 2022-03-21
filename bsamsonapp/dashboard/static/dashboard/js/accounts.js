@@ -12,9 +12,11 @@ function setPicture() {
     $('.set-user-picture').find('input[type=file]').change(function() {
         $('.set-user-picture').find('form').submit();
     });
-    document.querySelector('i.set-user-picture').addEventListener('click', () => {
-        document.querySelector('input[type=file]').click()
-    })
+    if (document.querySelector('i.set-user-picture')) {
+        document.querySelector('i.set-user-picture').addEventListener('click', () => {
+            document.querySelector('input[type=file]').click()
+        })
+    }
 }
 
 function setDescription() {

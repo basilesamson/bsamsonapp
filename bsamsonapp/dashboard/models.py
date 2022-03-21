@@ -18,7 +18,7 @@ class Skill(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['-id']
+        ordering = ['-value']
 
 
 class Formation(models.Model):
