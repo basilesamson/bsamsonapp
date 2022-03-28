@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Basile SAMSON basile.samsonpro@gmail.com, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-28 09:34+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Basile SAMSON basile.samsonpro@gmail.com\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\bsamsonapp\settings.py:121
+msgid "English"
+msgstr ""
+
+#: .\bsamsonapp\settings.py:122
+msgid "French"
+msgstr ""
+
+#: .\templates\base.html:6 .\templates\left-menu.html:23
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\left-menu.html:14
+msgid "See user profile"
+msgstr "Voir le profil"
+
+#: .\templates\left-menu.html:15
+msgid "Invite collaborators"
+msgstr "Inviter des collaborateurs"
+
+#: .\templates\left-menu.html:17
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+#: .\templates\left-menu.html:22
+msgid "Menu"
+msgstr "Menu"
+
+#: .\templates\left-menu.html:24
+msgid "Calendar"
+msgstr "Calendrier"
+
+#: .\templates\left-menu.html:25
+msgid "Projects"
+msgstr "Projets"
+
+#: .\templates\left-menu.html:26
+msgid "Profile"
+msgstr "Profil"
+
+#: .\templates\left-menu.html:27
+msgid "Messages"
+msgstr "Messages"
+
+#: .\templates\left-menu.html:29
+msgid "Administration"
+msgstr "Administration"
+
+#: .\templates\left-menu.html:34
+msgid "Authenticate"
+msgstr "S'authentifier"
+
+#: .\templates\left-menu.html:35
+msgid "Login"
+msgstr "Se connecter"
+
+#: .\templates\left-menu.html:36
+msgid "Sign up"
+msgstr "S'inscrire"
+
+#: .\templates\left-menu.html:41
+msgid "by"
+msgstr "par"
+
+#: .\templates\left-menu.html:42
+msgid "with"
+msgstr "avec"
+
+#: .\templates\left-menu.html:42
+msgid "for"
+msgstr "pour"
